@@ -1,6 +1,11 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id("com.palantir.graal") version("0.12.0")
 }
+
+// Shadowing Test Sources and Dependencies
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
@@ -9,11 +14,107 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+graal {
+
+    javaVersion('11')
+    mainClass('ru.heisenbug.cmd.Tester')
+    outputName('guitester')
+    option('-cp')
+    option('build/output/libs/*')
+//    option('/home/mike/tools/libs/picocli-4.7.1.jar')
+
+    option('--verbose')
+    option('--no-fallback')
+    option('-H:+ReportExceptionStackTraces')
+//    option('--allow-incomplete-classpath')
 }
+
+// ./gradlew -q dependencies --configuration testImplementation
+dependencies {
+
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.selenide:selenide-selenoid:2.3.7'
+
+    annotationProcessor('info.picocli:picocli-codegen:4.7.1')
+    testImplementation 'info.picocli:picocli:4.7.1'
+
+    testImplementation('org.apache.logging.log4j:log4j-api:2.20.0')
+    testImplementation('org.apache.logging.log4j:log4j-core:2.20.0')
+    testImplementation('org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0')
+
+}
+
+configurations {
+
+    testImplementation {
+        canBeResolved = true
+        // canBeConsumed = true
+    }
+
+}
+
 
 test {
     useJUnitPlatform()
 }
+
+shadowJar {
+    archiveBaseName.set('guitester')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+task testJar(type: ShadowJar) {
+    manifest {
+        attributes (
+                'Main-Class': 'ru.heisenbug.cmd.Tester',
+                'Description': 'This is an application JAR for guitests'
+        )
+    }
+    archiveBaseName.set('guitester')
+    // archiveClassifier.set("tests")
+    archiveClassifier.set("")
+    from sourceSets.test.output
+    configurations = [project.configurations.testImplementation]
+}
+
+// ./gradlew clean build
+// without test runs
+// ./gradlew clean jar
+// java -jar ./build/libs/guitester-1.0-SNAPSHOT.jar smoketest --browser=firefox
+// create guitester executable image
+// ./gradlew nativeImage --info
+build{
+    dependsOn testJar
+}
+
+tasks.register('libJar', Jar) {
+    from sourceSets.test.output
+}
+
+jar{
+    dependsOn testJar
+    from sourceSets.test.output
+}
+
+task printSourceSetInformation(){
+    doLast{
+        sourceSets.each { srcSet ->
+            println "["+srcSet.name+"]"
+            print "-->Source directories: "+srcSet.allJava.srcDirs+"\n"
+            print "-->Output directories: "+srcSet.output.classesDirs.files+"\n"
+            println ""
+        }
+        println "testImplementation: " + project.configurations.testImplementation
+    }
+}
+
+task copyToLib(type: Copy) {
+    into "${buildDir}/output/libs"
+    from configurations.testImplementation
+}
+
+nativeImage.dependsOn(copyToLib)
