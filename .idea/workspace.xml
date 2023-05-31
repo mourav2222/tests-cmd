@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66d5af75-b124-451c-90fe-3943952de607" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="66d5af75-b124-451c-90fe-3943952de607" name="Changes" comment="release version 1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/TestLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/TestLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/MainCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/MainCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/command/smokeTestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/command/smokeTestCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/config/TestLauncherConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/config/TestLauncherConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/extension/GoogleTestExtension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/extension/GoogleTestExtension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/service/TestLauncherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/service/TestLauncherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/DuckDuckGoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/DuckDuckGoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/log4j2.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +43,25 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="tests-cmd" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="graal" type="c8890929:TasksNode$1" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -88,6 +94,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/mike/projects/tests-cmd&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -216,6 +223,14 @@
       <option name="presentableId" value="Default" />
       <updated>1685124802523</updated>
     </task>
+    <task id="LOCAL-00001" summary="release version 1.0">
+      <created>1685392227468</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685392227468</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,6 +246,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="release version 1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="release version 1.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
