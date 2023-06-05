@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66d5af75-b124-451c-90fe-3943952de607" name="Changes" comment="release version 1.0">
+    <list default="true" id="66d5af75-b124-451c-90fe-3943952de607" name="Changes" comment="graal native-image attempts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,19 +90,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mike/projects/tests-cmd&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.35714287&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "false",
+    "last_opened_file_path": "/home/mike/projects/tests-cmd",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.35714287",
+    "settings.editor.selected.configurable": "preferences.customizations"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test/resources" />
@@ -115,7 +116,7 @@
       <recent name="ru.heisenbug.tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Tester">
+  <component name="RunManager" selected="Application.Tester (chrome as default)">
     <configuration name="TestLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="SNAP" value="/snap/firefox/current" />
@@ -149,7 +150,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Tester (chrome as default)" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="ru.heisenbug.cmd.Tester" />
       <module name="tests-cmd.test" />
       <option name="PROGRAM_PARAMETERS" value="smoketest" />
@@ -202,13 +203,13 @@
     </configuration>
     <list>
       <item itemvalue="Application.Tester - smoketest" />
-      <item itemvalue="Application.Tester" />
+      <item itemvalue="Application.Tester (chrome as default)" />
       <item itemvalue="Application.TestLauncher" />
       <item itemvalue="Gradle.GoorleTest.userCanSearchKeyword" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Tester" />
+        <item itemvalue="Application.Tester (chrome as default)" />
         <item itemvalue="Application.TestLauncher" />
         <item itemvalue="Gradle.GoorleTest.userCanSearchKeyword" />
       </list>
@@ -230,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685392227468</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="graal native-image attempts">
+      <created>1685539405579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685539405579</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -247,7 +255,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="release version 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="release version 1.0" />
+    <MESSAGE value="graal native-iamge attempts" />
+    <MESSAGE value="graal native-image attempts" />
+    <option name="LAST_COMMIT_MESSAGE" value="graal native-image attempts" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

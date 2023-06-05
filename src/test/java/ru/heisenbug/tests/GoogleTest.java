@@ -40,7 +40,8 @@ public class GoogleTest {
                 .pressEnter();
 
         $$(".react-results--main [data-testid='result']").shouldHave(sizeGreaterThan(5));
-        $(".react-results--main [data-testid='result']").shouldHave(text("Moscow"));
+//        $(".react-results--main [data-testid='result']").shouldHave(text("Moscow"));
+        $$(".react-results--main [data-testid='result']").get(2).shouldHave(text("heisenbug.ru"));
 
         sleep(5000);
     }
