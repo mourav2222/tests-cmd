@@ -35,12 +35,15 @@ public class GoogleTest {
         if(GoogleTestExtension.browser.isPresent()) {
             Configuration.browser = GoogleTestExtension.browser.get();
         }
+
+        Configuration.browserSize = "1600x900";
+
         open("https://duckduckgo.com");
         $(By.name("q")).val("selenide heisenbug")
                 .pressEnter();
 
         $$(".react-results--main [data-testid='result']").shouldHave(sizeGreaterThan(5));
-        $(".react-results--main [data-testid='result']").shouldHave(text("Moscow"));
+        $$(".react-results--main [data-testid='result']").get(0).shouldHave(text("heisenbug.ru"));
 
         sleep(5000);
     }

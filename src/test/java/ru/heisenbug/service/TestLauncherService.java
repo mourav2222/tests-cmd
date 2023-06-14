@@ -33,7 +33,7 @@ public  class TestLauncherService {
                 .request()
                 .configurationParameter(TestLauncherConfig.BROWSER.getParameter(), browser)
                 .selectors(DiscoverySelectors.selectPackage("ru.heisenbug.tests"))
-                 .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\.Google.*"))
+                .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\.Google.*"))
                 // .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\.XXGoogle.*"))
                 // .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\..*"))
                 .build();

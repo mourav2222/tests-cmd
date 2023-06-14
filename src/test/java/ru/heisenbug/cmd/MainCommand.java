@@ -6,9 +6,9 @@ import ru.heisenbug.command.smokeTestCommand;
 @CommandLine.Command(
         name = "guitester",
         subcommands = {
-            smokeTestCommand.class
+                smokeTestCommand.class
         }
-        )
+)
 public class MainCommand implements Runnable {
 
     @Override
