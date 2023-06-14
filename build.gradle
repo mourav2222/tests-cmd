@@ -17,6 +17,10 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+
+}
+
 graal {
 
     javaVersion('11')
@@ -30,6 +34,38 @@ graal {
     option('--no-fallback')
     option('-H:+ReportExceptionStackTraces')
 //    option('--allow-incomplete-classpath')
+}
+
+
+// ./gradlew -q dependencies --configuration testImplementation
+dependencies {
+
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.selenide:selenide-selenoid:2.3.7'
+
+    annotationProcessor('info.picocli:picocli-codegen:4.7.1')
+    testImplementation 'info.picocli:picocli:4.7.1'
+
+    testImplementation('org.apache.logging.log4j:log4j-api:2.20.0')
+    testImplementation('org.apache.logging.log4j:log4j-core:2.20.0')
+    testImplementation('org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0')
+
+    // nativeImageTestCompileOnly fileTree(dir: "${project.buildDir}/output/libs", include: '*.jar')
+
+}
+
+
+configurations {
+
+    testImplementation {
+        canBeResolved = true
+        // canBeConsumed = true
+    }
+
+    // nativeImageClasspath.extendsFrom(testImplementation)
 }
 
 graalvmNative {
@@ -54,15 +90,23 @@ graalvmNative {
             // excludeConfig.put(file("path/to/artifact.jar"), listOf("^/META-INF/native-image/.*", "^/config/.*"))
 
             // Advanced options
+            // buildArgs.add("-cp ${project.buildDir}/output/libs/*")
             // buildArgs.add('-H:Extra') // Passes '-H:Extra' to the native image builder options. This can be used to pass parameters which are not directly supported by this extension
             // jvmArgs.add('flag') // Passes 'flag' directly to the JVM running the native image builder
 
             // Runtime options
             runtimeArgs.add('--help') // Passes '--help' to built image, during "nativeRun" task
 
+            // classpath("${project.buildDir}/output/libs/*")
+            // classpath = sourceSets.test.runtimeClasspath
+
             useFatJar = true // Instead of passing each jar individually, builds a fat jar
         }
     }
+}
+
+tasks.named('nativeCompile') {
+    outputs.upToDateWhen { false }
 }
 
 println("${project.buildDir}/libs/guitester-${version}.jar")
@@ -70,33 +114,6 @@ println("${project.buildDir}/libs/guitester-${version}.jar")
 //tasks.named("nativeCompile") {
 //    classpathJar = ("${project.buildDir}/libs/guitester-${version}.jar")
 //}
-
-// ./gradlew -q dependencies --configuration testImplementation
-dependencies {
-
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
-
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
-    testImplementation 'org.selenide:selenide-selenoid:2.3.7'
-
-    annotationProcessor('info.picocli:picocli-codegen:4.7.1')
-    testImplementation 'info.picocli:picocli:4.7.1'
-
-    testImplementation('org.apache.logging.log4j:log4j-api:2.20.0')
-    testImplementation('org.apache.logging.log4j:log4j-core:2.20.0')
-    testImplementation('org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0')
-
-}
-
-configurations {
-
-    testImplementation {
-        canBeResolved = true
-        // canBeConsumed = true
-    }
-
-}
 
 
 test {
@@ -168,7 +185,29 @@ jar {
 
 
 task testJar(type: Jar, dependsOn: testClasses) {
-    from sourceSets.test.allSource
+    manifest {
+        attributes( 'Main-Class': 'ru.heisenbug.cmd.Tester' )
+    }
+    from sourceSets.test.output
+}
+
+// ./gradlew clean customFatJar --info
+// java -jar ./build/libs/testerFat-1.0-SNAPSHOT.jar smoketest --browser=firefox
+
+task customFatJar(type: Jar, dependsOn: testClasses) {
+//    from sourceSets.test.output
+//     archiveClassifier = 'test'
+    manifest {
+        attributes( 'Main-Class': 'ru.heisenbug.cmd.Tester' )
+    }
+    archiveBaseName = 'testerFat'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from sourceSets.test.output
+    from {
+        configurations.testCompileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.testRuntimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
 }
 
 task printSourceSetInformation(){
@@ -190,3 +229,18 @@ task copyToLib(type: Copy) {
 }
 
 nativeImage.dependsOn(copyToLib)
+
+tasks.register("myConfigs") {
+    doFirst{
+        sourceSets.test.runtimeClasspath.each { println it}
+        println '#############################################################'
+        println configurations.testCompileClasspath.collect {it.isDirectory() ? it: zipTree(it)}.join('\n')
+        println '#############################################################'
+    }
+    doLast {
+        configurations.forEach { println(it) }
+    }
+}
+
+// java -jar ./build/libs/testerFat-1.0-SNAPSHOT.jar smoketest --browser=firefox
+
