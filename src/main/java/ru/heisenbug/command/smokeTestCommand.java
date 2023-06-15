@@ -11,7 +11,7 @@ public class smokeTestCommand implements Runnable {
 
     @CommandLine.Option(
             names = {"--browser"},
-            description = "Browser name or default is chrome"
+            description = "Set a browser name [chrome, firefox, edge]. Default browser is chrome"
     )
     protected String browser;
 

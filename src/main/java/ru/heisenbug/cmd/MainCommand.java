@@ -1,7 +1,7 @@
 package ru.heisenbug.cmd;
 
-import picocli.CommandLine;
 import ru.heisenbug.command.smokeTestCommand;
+import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "guitester",

@@ -1,16 +1,15 @@
 package ru.heisenbug.tests;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.heisenbug.extension.GoogleTestExtension;
-
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
 
 @ExtendWith(GoogleTestExtension.class)
 public class GoogleTest {
@@ -38,14 +37,14 @@ public class GoogleTest {
 
         Configuration.browserSize = "1600x900";
 
-        open("https://duckduckgo.com");
-        $(By.name("q")).val("selenide heisenbug")
+        Selenide.open("https://duckduckgo.com");
+        Selenide.$(By.name("q")).val("selenide heisenbug")
                 .pressEnter();
 
-        $$(".react-results--main [data-testid='result']").shouldHave(sizeGreaterThan(5));
-        $$(".react-results--main [data-testid='result']").get(0).shouldHave(text("heisenbug.ru"));
+        Selenide.$$(".react-results--main [data-testid='result']").shouldHave(CollectionCondition.sizeGreaterThan(5));
+        Selenide.$$(".react-results--main [data-testid='result']").get(0).shouldHave(Condition.text("heisenbug.ru"));
 
-        sleep(5000);
+        Selenide.sleep(5000);
     }
 
 }

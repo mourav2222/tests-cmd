@@ -1,14 +1,13 @@
 package ru.heisenbug.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import ru.heisenbug.extension.GoogleTestExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.heisenbug.extension.GoogleTestExtension;
-
-import static com.codeborne.selenide.Selenide.*;
 
 @ExtendWith(GoogleTestExtension.class)
 public class DuckDuckGoTest {
@@ -24,11 +23,11 @@ public class DuckDuckGoTest {
         if(GoogleTestExtension.browser.isPresent()) {
             Configuration.browser = GoogleTestExtension.browser.get();
         }
-        open("https://duckduckgo.com");
-        $(By.name("q")).val("selenide heisenbug")
+        Selenide.open("https://duckduckgo.com");
+        Selenide.$(By.name("q")).val("selenide heisenbug")
                 .pressEnter();
 
-        sleep(5000);
+        Selenide.sleep(5000);
     }
 
 }

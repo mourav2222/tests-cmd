@@ -1,5 +1,6 @@
 package ru.heisenbug.service;
 
+import org.junit.platform.engine.discovery.ClassNameFilter;
 import org.junit.platform.engine.discovery.DiscoverySelectors;
 import org.junit.platform.launcher.Launcher;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
@@ -11,8 +12,6 @@ import org.slf4j.LoggerFactory;
 import ru.heisenbug.config.TestLauncherConfig;
 
 import java.io.PrintWriter;
-
-import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 
 public  class TestLauncherService {
     final private Launcher launcher;
@@ -26,6 +25,10 @@ public  class TestLauncherService {
 
     public void executeTestPlan(String browser) {
 
+        if(browser == null) {
+            browser = "chrome";
+        }
+
         logger.info("Browser (executeTestPlan): {}", browser);
 
         SummaryGeneratingListener summaryGeneratingListener = new SummaryGeneratingListener();
@@ -33,7 +36,7 @@ public  class TestLauncherService {
                 .request()
                 .configurationParameter(TestLauncherConfig.BROWSER.getParameter(), browser)
                 .selectors(DiscoverySelectors.selectPackage("ru.heisenbug.tests"))
-                .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\.Google.*"))
+                .filters(ClassNameFilter.includeClassNamePatterns("ru\\.heisenbug\\.tests\\.Google.*"))
                 // .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\.XXGoogle.*"))
                 // .filters(includeClassNamePatterns("ru\\.heisenbug\\.tests\\..*"))
                 .build();

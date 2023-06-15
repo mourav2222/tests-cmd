@@ -40,18 +40,21 @@ graal {
 // ./gradlew -q dependencies --configuration testImplementation
 dependencies {
 
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
+    implementation 'org.junit.platform:junit-platform-launcher:1.9.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+
     testImplementation 'org.selenide:selenide-selenoid:2.3.7'
+    implementation 'org.selenide:selenide-selenoid:2.3.7'
 
     annotationProcessor('info.picocli:picocli-codegen:4.7.1')
-    testImplementation 'info.picocli:picocli:4.7.1'
+    implementation 'info.picocli:picocli:4.7.1'
 
-    testImplementation('org.apache.logging.log4j:log4j-api:2.20.0')
-    testImplementation('org.apache.logging.log4j:log4j-core:2.20.0')
-    testImplementation('org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0')
+    implementation('org.apache.logging.log4j:log4j-api:2.20.0')
+    implementation('org.apache.logging.log4j:log4j-core:2.20.0')
+    implementation('org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0')
 
     // nativeImageTestCompileOnly fileTree(dir: "${project.buildDir}/output/libs", include: '*.jar')
 
@@ -65,6 +68,10 @@ configurations {
         // canBeConsumed = true
     }
 
+    implementation {
+        canBeResolved = true
+        // canBeConsumed = true
+    }
     // nativeImageClasspath.extendsFrom(testImplementation)
 }
 
@@ -135,17 +142,19 @@ shadowJar {
 }
 
 task testShadowJar(type: ShadowJar) {
+//    minimize()
     manifest {
         attributes (
                 'Main-Class': 'ru.heisenbug.cmd.Tester',
-                'Description': 'This is an application JAR for guitests'
+                'Description': 'This is an command line application JAR for guitests execution.'
         )
     }
     archiveBaseName.set('guitester')
     // archiveClassifier.set("tests")
     archiveClassifier.set("")
-    from sourceSets.test.output
-    configurations = [project.configurations.testImplementation]
+    from sourceSets.main.output, sourceSets.test.output
+//    from sourceSets.test.output
+    configurations = [project.configurations.implementation, project.configurations.testImplementation]
 }
 
 // ./gradlew clean build
@@ -153,19 +162,26 @@ task testShadowJar(type: ShadowJar) {
 // ./gradlew clean jar
 // java -cp './build/output/libs/*:./build/libs/tests-cmd-1.0-SNAPSHOT.jar' ru.heisenbug.cmd.Tester
 
+// Start smoketest from command line
 // java -jar ./build/libs/guitester-1.0-SNAPSHOT.jar smoketest --browser=firefox
+
 // create guitester executable image
 // ./gradlew nativeImage --info
-build{
+build {
     dependsOn testShadowJar
 }
+
+// Generate test classes from test source
+// testClasses.mustRunAfter(classes)
+
 
 tasks.register('libJar', Jar) {
     from sourceSets.test.output
 }
 
 jar {
-    dependsOn testClasses, testShadowJar
+//    dependsOn testClasses, testShadowJar
+    dependsOn testShadowJar
     manifest {
         attributes(
                 'Main-Class': 'ru.heisenbug.cmd.Tester',
@@ -173,6 +189,7 @@ jar {
         )
 
     }
+//    from sourceSets.main.output, sourceSets.test.output
     from sourceSets.test.output
 }
 
@@ -184,11 +201,13 @@ jar {
 //}
 
 
-task testJar(type: Jar, dependsOn: testClasses) {
+//task testJar(type: Jar, dependsOn: testClasses) {
+task testJar(type: Jar) {
     manifest {
-        attributes( 'Main-Class': 'ru.heisenbug.cmd.Tester' )
+        attributes('Main-Class': 'ru.heisenbug.cmd.Tester')
     }
     from sourceSets.test.output
+//    from sourceSets.main.output
 }
 
 // ./gradlew clean customFatJar --info
@@ -222,10 +241,17 @@ task printSourceSetInformation(){
     }
 }
 
-// copy all dependencies jar files
+// Copy all dependencies jar files
 task copyToLib(type: Copy) {
     into "${buildDir}/output/libs"
     from configurations.testImplementation
+}
+
+// Copy test classes to build main directory
+task copyTestClassesToMain(type: Copy) {
+    from "${buildDir}/classes/java/test/ru/heisenbug/tests"
+    into "${buildDir}/classes/java/main/ru/heisenbug/tests"
+
 }
 
 nativeImage.dependsOn(copyToLib)
