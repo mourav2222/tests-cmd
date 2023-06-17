@@ -5,6 +5,10 @@ plugins {
 
     // Apply GraalVM Native Image plugin
     id 'org.graalvm.buildtools.native' version '0.9.22'
+
+    id "io.qameta.allure" version "2.11.2"
+
+    id 'ru.iopump.qa.allure' version "0.1.2"
 }
 
 // Shadowing Test Sources and Dependencies
@@ -13,8 +17,34 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
+ext {
+    allureVersion = '2.22.2'
+}
+
 repositories {
     mavenCentral()
+}
+
+reporting {
+    baseDir = "$buildDir/reports"
+}
+
+allureServer {
+    relativeResultDir = 'build/allure-results'
+    allureServerUrl = 'http://localhost:8083'
+}
+
+allure {
+//    io.qameta.allure:allure-junit5:2.22.2
+    version = allureVersion
+    report {
+        // There might be several tasks producing the report, so the property
+        // configures a base directory for all the reports
+        // Each task creates its own subfolder there
+        reportDir.set(project.reporting.baseDirectory.dir("allure-report"))
+
+    }
+
 }
 
 sourceSets {
@@ -46,6 +76,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testImplementation 'org.selenide:selenide-selenoid:2.3.7'
 
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide
+    testImplementation 'io.qameta.allure:allure-selenide:2.22.2'
+    testImplementation 'io.qameta.allure:allure-junit5:2.22.2'
+
     annotationProcessor('info.picocli:picocli-codegen:4.7.1')
     testImplementation 'info.picocli:picocli:4.7.1'
 
@@ -66,6 +100,37 @@ configurations {
     }
 
     // nativeImageClasspath.extendsFrom(testImplementation)
+}
+
+tasks.register('pwdShow', Exec) {
+    commandLine "pwd"
+}
+
+task allureTest(type: Exec) {
+    commandLine "./build/allure/commandline/bin/allure"
+}
+
+task generateAllureReport(type: Exec) {
+    workingDir "${buildDir}"
+//    commandLine "allure/commandline/bin/allure generate -c allure-results -o reports/allure-report"
+    executable = "allure/commandline/bin/allure"
+    args = ["generate", "-c", "allure-results", "-o", "reports/allure-report"]
+
+}
+// test.finalizedBy(generateAllureReport)
+
+task openAllureReport(type: Exec) {
+    workingDir "${buildDir}"
+//    commandLine "allure/commandline/bin/allure open reports/allure-report"
+    executable = "allure/commandline/bin/allure"
+    args = ["open", "reports/allure-report"]
+}
+
+task serveAllureReport(type: Exec) {
+    workingDir "${buildDir}"
+//    commandLine "allure/commandline/bin/allure serve allure-results"
+    executable = "allure/commandline/bin/allure"
+    args = ["serve", "allure-results"]
 }
 
 graalvmNative {
@@ -117,6 +182,10 @@ println("${project.buildDir}/libs/guitester-${version}.jar")
 
 
 test {
+    testLogging {
+        showStandardStreams = true
+        events = ["passed", "failed", "skipped"]
+    }
     useJUnitPlatform()
 }
 
@@ -125,9 +194,26 @@ shadowJar {
     archiveClassifier.set('')
 //    archiveVersion.set('')
 
+    mergeServiceFiles()
+
     from sourceSets.test.output
     configurations = [project.configurations.testImplementation]
 
+}
+
+// ./gradlew clean createGuitesterJar
+// java -jar ./build/libs/guitester-1.0-SNAPSHOT.jar smoketest --browser=firefox
+tasks.register('createGuitesterJar') {
+    dependsOn(shadowJar)
+}
+
+//Gradle 8+ toolchain error "Toolchain from `executable` property does not match toolchain from `javaLauncher` property" when different JDK and running main class in subproject
+gradle.taskGraph.whenReady { taskGraph ->
+    def task = taskGraph.allTasks.find { it.name.endsWith(".main()") }
+    if (task instanceof JavaExec) {
+        task.executable = task.javaLauncher.get().executablePath.asFile.absolutePath
+        println('task.executable: ' + task.executable)
+    }
 }
 
 task testShadowJar(type: ShadowJar) {
@@ -140,6 +226,9 @@ task testShadowJar(type: ShadowJar) {
     archiveBaseName.set('guitester')
     // archiveClassifier.set("tests")
     archiveClassifier.set("")
+
+    mergeServiceFiles()
+
     from sourceSets.test.output
     configurations = [project.configurations.testImplementation]
 }

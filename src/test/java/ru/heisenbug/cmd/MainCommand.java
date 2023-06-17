@@ -1,12 +1,14 @@
 package ru.heisenbug.cmd;
 
 import picocli.CommandLine;
+import ru.heisenbug.command.allureReport;
 import ru.heisenbug.command.smokeTestCommand;
 
 @CommandLine.Command(
         name = "guitester",
         subcommands = {
-            smokeTestCommand.class
+            smokeTestCommand.class,
+            allureReport.class
         }
         )
 public class MainCommand implements Runnable {
