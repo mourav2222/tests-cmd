@@ -13,9 +13,9 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 @ExtendWith(GoogleTestExtension.class)
-public class GoogleTest {
+public class DuckDuckGoTestCase {
 
-    private final Logger logger = LoggerFactory.getLogger(GoogleTest.class);
+    private final Logger logger = LoggerFactory.getLogger(DuckDuckGoTestCase.class);
 
 //     don't work
 //    @BeforeAll
@@ -28,7 +28,7 @@ public class GoogleTest {
     @Test
     public void userCanSearchKeyword() {
 
-        logger.info("Class name: {}", GoogleTest.class.getName());
+        logger.info("Class name: {}", DuckDuckGoTestCase.class.getName());
         logger.info("Browser (userCanSearchKeyword): {}", GoogleTestExtension.browser.orElse("undefined_browser"));
 
         // default browser chrome

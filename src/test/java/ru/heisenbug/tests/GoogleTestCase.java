@@ -70,22 +70,22 @@ class GoogleTestCase extends BaseCase {
         step2();
         step3();
     }
-    @Step("111")
+    @Step("Step 1")
     public void step1() {
-        Allure.step(String.format("Step 1 [%s]", GLOBAL_PARAMETER));
+//        Allure.step(String.format("Step 1 [%s]", GLOBAL_PARAMETER));
         refresh();
         refresh();
     }
 
-    @Step("222")
+    @Step("Step 2")
     public void step2() {
-        Allure.step(String.format("Step 2 [%s]", GLOBAL_PARAMETER));
+//        Allure.step(String.format("Step 2 [%s]", GLOBAL_PARAMETER));
         refresh();
     }
 
-    @Step("333")
+    @Step("Step 3")
     public void step3() {
-        Allure.step(String.format("Step 3 [%s]", GLOBAL_PARAMETER));
+//        Allure.step(String.format("Step 3 [%s]", GLOBAL_PARAMETER));
         refresh();
     }
 }

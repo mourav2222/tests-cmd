@@ -126,10 +126,14 @@ task openAllureReport(type: Exec) {
     args = ["open", "reports/allure-report"]
 }
 
+// Open Allure Report in the browser
 task serveAllureReport(type: Exec) {
     workingDir "${buildDir}"
-//    commandLine "allure/commandline/bin/allure serve allure-results"
-    executable = "allure/commandline/bin/allure"
+    if(org.gradle.internal.os.OperatingSystem.current().isLinux()) {
+        executable = "${buildDir}/allure/commandline/bin/allure"
+    } else {
+        executable = "${buildDir}/allure/commandline/bin/allure.bat"
+    }
     args = ["serve", "allure-results"]
 }
 
