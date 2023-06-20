@@ -27,6 +27,7 @@ class GoogleTestCase extends BaseCase {
 
 
     @Test
+//    @Disabled
     @DisplayName("Human-readable test name")
     @Description("Some detailed test description")
     @Severity(SeverityLevel.CRITICAL)
@@ -55,6 +56,7 @@ class GoogleTestCase extends BaseCase {
     }
 
     @Test
+//    @Disabled
     @Flaky
     void userCanSearchKeyword2() {
         userCanSearchKeyword();

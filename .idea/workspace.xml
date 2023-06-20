@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66d5af75-b124-451c-90fe-3943952de607" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/MainCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/cmd/MainCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/service/TestLauncherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/service/TestLauncherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/heisenbug/tests/GoogleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +33,23 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="tests-cmd" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tests-cmd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -69,6 +82,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/mike/projects/tests-cmd&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -89,7 +103,7 @@
       <recent name="ru.heisenbug.tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Tester - smoketest - firefox">
+  <component name="RunManager" selected="Application.Tester - smoketest -chrome">
     <configuration name="TestLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="SNAP" value="/snap/firefox/current" />
@@ -154,53 +168,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GoogleTest.userCanSearchKeyword" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.heisenbug.tests.GoogleTest.userCanSearchKeyword&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
-      <method v="2" />
+    <configuration name="GoogleTestCase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests-cmd.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.heisenbug.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.heisenbug.tests" />
+      <option name="MAIN_CLASS_NAME" value="ru.heisenbug.tests.GoogleTestCase" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="GoorleTest.userCanSearchKeyword" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.heisenbug.GoorleTest.userCanSearchKeyword&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
-      <method v="2" />
+    <configuration name="GoogleTestCase.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tests-cmd.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.heisenbug.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.heisenbug.tests" />
+      <option name="MAIN_CLASS_NAME" value="ru.heisenbug.tests.GoogleTestCase" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="heisenbug" />
@@ -220,15 +218,15 @@
       <item itemvalue="Application.Tester - smoketest -chrome" />
       <item itemvalue="Application.Tester" />
       <item itemvalue="Application.TestLauncher" />
-      <item itemvalue="Gradle.GoogleTest.userCanSearchKeyword" />
-      <item itemvalue="Gradle.GoorleTest.userCanSearchKeyword" />
+      <item itemvalue="JUnit.GoogleTestCase.test1" />
+      <item itemvalue="JUnit.GoogleTestCase" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.GoogleTest.userCanSearchKeyword" />
+        <item itemvalue="JUnit.GoogleTestCase" />
+        <item itemvalue="JUnit.GoogleTestCase.test1" />
         <item itemvalue="Application.Tester" />
         <item itemvalue="Application.TestLauncher" />
-        <item itemvalue="Gradle.GoorleTest.userCanSearchKeyword" />
       </list>
     </recent_temporary>
   </component>
@@ -241,6 +239,28 @@
       <option name="presentableId" value="Default" />
       <updated>1685124802523</updated>
     </task>
+    <task id="LOCAL-00001" summary="Bug - @Step don't work">
+      <created>1687177959032</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687177959032</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Bug - in Junit5, add TestListener -&gt; double counters in summary">
+      <created>1687253539766</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1687253539767</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Bug - in Junit5, add TestListener -&gt; double counters in summary">
+      <created>1687254753585</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687254753585</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -256,6 +276,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Bug - @Step don't work" />
+    <MESSAGE value="Bug - in Junit5, add TestListener -&gt; double counters in summary" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug - in Junit5, add TestListener -&gt; double counters in summary" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
